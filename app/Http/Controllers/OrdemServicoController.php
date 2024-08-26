@@ -48,10 +48,10 @@ class OrdemServicoController extends Controller
      */
     public function show($id)
     {
-        $ordemservicos = OrdemServico::with('cliente','servico','Empresa')->find($id);
+        $ordemservico = OrdemServico::with('cliente','servico','Empresa')->find($id);
         return response()->json([
             'status'=>True,
-            'ordemservicos'=>$ordemservicos
+            'ordemservico'=>$ordemservico
         ]);
     }
 
