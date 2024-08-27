@@ -65,4 +65,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::delete('/ordemservicos/{id}', [OrdemServicoController::class, 'destroy']);
     Route::put('/ordemservicos/{id}', [OrdemServicoController::class, 'update']);
     Route::get('/ordemservicos/{id}',[OrdemServicoController:: class,'show']);
+
+    Route::get('/imagens/{id}','ImagemController@show');
+
+
 });
