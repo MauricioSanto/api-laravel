@@ -81,6 +81,7 @@ class OrdemServicoController extends Controller
             'empresa_id'=>'integer',
             'data'=>'date',
             'data_finalizacao'=>'date',
+            'status'=>'boolean'
         
         ]);
         if ($Validator->fails()) {
@@ -91,7 +92,7 @@ class OrdemServicoController extends Controller
         return response()->json([
             'status'=> true,
             'message'=>'Ordem de Serviço atualizada com sucesso',
-            'serviço'=> $ordemservicos
+            'ordemserviço'=> $ordemservicos
 
         ], 200);
     }
