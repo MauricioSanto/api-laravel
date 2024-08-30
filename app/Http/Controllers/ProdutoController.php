@@ -82,7 +82,7 @@ class ProdutoController extends Controller
         
         $validator = Validator ::make($request->all(),[
             'nome'=>'string |max:255',
-            'valor'=>'integer',
+            'valor'=>'float',
         ]);
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()],422);

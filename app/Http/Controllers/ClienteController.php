@@ -34,12 +34,24 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $clientes = Cliente::create($request->all());
-
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'data_nascimento' => 'required|date',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validação da imagem
+            'status'=> 'required|boolean',
+        ]);
+        $foto_camimho = $request->file('foto')->store('fotos', 'public');
+        
+        $cliente = Cliente::create([
+            'nome' => $request->input('nome'),
+            'data_nascimento' => $request->input('data_nascimento'),
+            'foto' => $foto_camimho,
+            'status'=> $request->input('status'),
+        ]);   
         return response()->json([
             'status' => true,
             'message' => "Cliente Cadastrado com sucesso!",
-            'cliente' => $clientes
+            'cliente' => $cliente
         ], 200);
     }
 
