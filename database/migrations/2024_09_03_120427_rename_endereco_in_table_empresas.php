@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cliente', function (Blueprint $table) {
-            $table->boolean('status')->default(0);
+        Schema::table('empresas', function (Blueprint $table) {
+            $table->string('endereco')->change();
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cliente', function (Blueprint $table) {
+        Schema::table('table_empresas', function (Blueprint $table) {
             //
         });
     }

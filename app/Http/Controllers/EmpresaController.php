@@ -84,6 +84,7 @@ class EmpresaController extends Controller
         $Validator = Validator ::make($request->all(),[
             'razao_social'=>'string |max:255',
             'cnpj'=>'string',
+            'endereco'=>'string'
         ]);
         if ($Validator->fails()) {
             return response()->json(['errors'=>$Validator->errors()],422);

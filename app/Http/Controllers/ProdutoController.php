@@ -13,11 +13,11 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
+        $produto = Produto::all();
 
         return response()->json([
             'status' => true,
-            'produtos' => $produtos
+            'produtos' => $produto
         ]);
     }
 
@@ -39,7 +39,7 @@ class ProdutoController extends Controller
         return response()->json([
             'status' => true,
             'message' => "Produto Criado com sucesso!",
-            'produto' => $produto
+            'produtos' => $produto
         ], 200);
     }
 
@@ -82,7 +82,7 @@ class ProdutoController extends Controller
         
         $validator = Validator ::make($request->all(),[
             'nome'=>'string |max:255',
-            'valor'=>'float',
+            'descricao'=>'string |max:255',
         ]);
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()],422);
@@ -92,7 +92,7 @@ class ProdutoController extends Controller
         return response()->json([
             'status'=> true,
             'message'=>'Produto atualizado com sucesso',
-            'produto'=> $produto
+            'produtos'=> $produto
 
         ], 200);
     }

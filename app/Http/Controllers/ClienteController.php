@@ -17,7 +17,7 @@ class ClienteController extends Controller
 
         return response()->json([
             'status' => true,
-            'clientes' => $clientes
+            'cliente' => $clientes
         ]);
     }
 
@@ -86,26 +86,38 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $clientes = Cliente::find($id);
-        if (!$clientes){
+        $cliente = Cliente::find($id);
+
+        
+
+        if (!$cliente){
             return response ()->json(['message'=>'Cliente não encontrado'], 404);
 
         }
         
         $validator = Validator ::make($request->all(),[
             'nome'=>'string |max:255',
-            'data_nascimento'=>'required|date',
-            'foto'=>'string',
+            'data_nascimento'=>'date',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status'=>'boolean'
         ]);
+
+        $foto_camimho = $request->file('foto')->store('fotos', 'public');
+        
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()],422);
         }
-        $clientes->update($request->all());
+        $cliente->nome =  $request->nome;
+        $cliente->data_nascimento = $request->data_nascimento;
+        $cliente->foto = $foto_camimho;
+        $cliente->status= $request->status;
+        $cliente->save();
 
+    
         return response()->json([
             'status'=> true,
             'message'=>'Cliente atualizado com sucesso',
-            'cliente'=> $clientes
+            'cliente'=> $cliente
 
         ], 200);
     }
