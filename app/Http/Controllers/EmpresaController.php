@@ -40,6 +40,7 @@ class EmpresaController extends Controller
             'status' => true,
             'message' => "Empresa Criada  com sucesso!",
             'empresa' => $empresa
+            
         ], 200);
     }
 
@@ -84,7 +85,10 @@ class EmpresaController extends Controller
         $Validator = Validator ::make($request->all(),[
             'razao_social'=>'string |max:255',
             'cnpj'=>'string',
-            'endereco'=>'string'
+            'endereco'=>'string',
+            'telefone'=>'string',
+            'numero'=>'integer',
+            'cep'=>'string',
         ]);
         if ($Validator->fails()) {
             return response()->json(['errors'=>$Validator->errors()],422);
